@@ -130,7 +130,33 @@ public class DrawLine : MonoBehaviour
 
         if(points.Count == 4)
         {
-            return new Cuadrilatero(points[0], points[1], points[2], points[3]);
+            Cuadrilatero outCuad = new Cuadrilatero(points[0], points[1], points[2], points[3]);
+
+            // Formula de area de Gauss
+            //"https://es.wikipedia.org/wiki/F%C3%B3rmula_del_%C3%A1rea_de_Gauss"
+
+            float area = 0;
+            for (int i = 0; i < points.Count; i++)
+            {
+                int j = (i + 1) % points.Count;
+                area += points[i].x * points[j].y;
+                area -= points[i].y * points[j].x;
+            }
+            area = Mathf.Abs(area) / 2.0f;
+
+            Debug.Log($"Area : {area.ToString()}");
+
+            float perimeter = 0;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                int nextIndex = (i + 1) % points.Count;
+                perimeter += Vector2.Distance(points[i], points[nextIndex]);
+            }
+
+            Debug.Log($"Parimeter : {perimeter.ToString()}");
+
+            return outCuad;
         }
         else
         {
