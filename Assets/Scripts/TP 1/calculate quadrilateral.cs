@@ -4,17 +4,17 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class DrawLine : MonoBehaviour
+public class CalculateQuadrilateral : MonoBehaviour
 {
-    Cuadrilatero cuadrilatero;
+    Quadrilateral cuadrilatero;
 
-    Lateral[] setCuadrilatero;
+    Side[] setCuadrilatero;
 
     int iterator = 0;
 
     void Start()
     {
-        setCuadrilatero = new Lateral[4];
+        setCuadrilatero = new Side[4];
     }
 
     void Update()
@@ -38,12 +38,12 @@ public class DrawLine : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            setCuadrilatero = new Lateral[3];
+            setCuadrilatero = new Side[3];
             iterator = 0;
         }
     }
 
-    Cuadrilatero DoLinesIntersect(Lateral[] laterales)
+    Quadrilateral DoLinesIntersect(Side[] laterales)
     {
         // Teoria de la interseccion de 2 segmentos
         //"https://es.wikipedia.org/wiki/Intersecci%C3%B3n_(geometr%C3%ADa)"
@@ -130,7 +130,7 @@ public class DrawLine : MonoBehaviour
 
         if(points.Count == 4)
         {
-            Cuadrilatero outCuad = new Cuadrilatero(points[0], points[1], points[2], points[3]);
+            Quadrilateral outCuad = new Quadrilateral(points[0], points[1], points[2], points[3]);
 
             // Formula de area de Gauss
             //"https://es.wikipedia.org/wiki/F%C3%B3rmula_del_%C3%A1rea_de_Gauss"
@@ -160,7 +160,7 @@ public class DrawLine : MonoBehaviour
         }
         else
         {
-            return new Cuadrilatero();
+            return new Quadrilateral();
         }
 
     }
@@ -191,27 +191,15 @@ public class DrawLine : MonoBehaviour
     }
 }
 
-public struct Cuadrilatero
+public struct Quadrilateral
 {
     public Vector3 a, b, c, d;
 
-    public Cuadrilatero(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+    public Quadrilateral(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
     {
         this.a = a; 
         this.b = b; 
         this.c = c;
         this.d = d;
-    }
-}
-
-public struct Lateral
-{
-    public Vector3 start;
-    public Vector3 end;
-
-    public Lateral(Vector3 start, Vector3 end)
-    {
-        this.start = start;
-        this.end = end; 
     }
 }
