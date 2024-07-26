@@ -1,10 +1,9 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Frustrum : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
-
     public Plane[] planes = new Plane[6];
 
     Quadrilateral nearPlane;

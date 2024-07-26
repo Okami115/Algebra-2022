@@ -11,13 +11,14 @@ public class AABBCalculator : MonoBehaviour
     MeshRenderer meshRenderer;
     Mesh mesh;
 
-
     private void Start()
     {
+        frustrum = FindAnyObjectByType<Frustrum>();
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         mesh = meshFilter.mesh;
     }
+
     void Update()
     {
         CalculateAABB();

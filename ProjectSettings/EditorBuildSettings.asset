@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Frustum.unity
+    guid: e88ac364fb87eab44bb7f255281b6782
   m_configObjects: {}
