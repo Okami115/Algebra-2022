@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7809341229793376649, guid: 2272cf6443bdcc543a00b905fe62abff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8113651368447826776, guid: 2272cf6443bdcc543a00b905fe62abff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -606,7 +606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6181695281835016353, guid: 4ba496db9b7dedf4ebca86880fced57d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -664,10 +664,6 @@ PrefabInstance:
     - target: {fileID: 7482467471462541153, guid: 76fb83260a022f346b1eeb8c1a59880e, type: 3}
       propertyPath: m_Name
       value: Room L
-      objectReference: {fileID: 0}
-    - target: {fileID: 7482467471462541153, guid: 76fb83260a022f346b1eeb8c1a59880e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ff32cc31e8119448670a7c1922c72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vertex: 07000000010000000300000005000000
   isVisble: 0
-  door: []
-  vertex: 
+  vertexDoor: []
