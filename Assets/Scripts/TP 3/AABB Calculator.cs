@@ -60,6 +60,18 @@ public class AABBCalculator : MonoBehaviour
         return true;
     }
 
+    static public bool IsInPlanes(Vector3 point, Plane[] planes)
+    {
+        foreach (Plane plane in planes)
+        {
+            if (!plane.GetSide(point))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying)

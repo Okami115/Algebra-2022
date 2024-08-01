@@ -6,16 +6,22 @@ public class Wall : MonoBehaviour
     [SerializeField] private int[] vertex;
 
     [Header("Holes")]
-    [SerializeField] private bool isVisble;
+    [SerializeField] public bool isVisble;
     [SerializeField] private Vector3[] vertexDoor;
 
-    private Plane plane;
-    private Plane doorPlane;
+    public Plane plane;
+    public Plane doorPlane;
     private Mesh mesh;
     private MeshFilter meshFilter;
 
-    private Vector3[] vertices;
-    private Vector3[] verticesDoor;
+    public Quadrilateral quadrilateral;
+    public Quadrilateral quadrilateralDoor;
+
+    public Vector3 center;
+    public Vector3 doorCenter;
+
+    public Vector3[] vertices;
+    public Vector3[] verticesDoor;
 
     private void Start()
     {
@@ -30,7 +36,10 @@ public class Wall : MonoBehaviour
             vertices[i] = transform.TransformPoint(mesh.vertices[i]);
         }
 
-        if(isVisble)
+        plane = new Plane(vertices[vertex[0]], vertices[vertex[1]], vertices[vertex[2]]);
+
+
+        if (isVisble)
         {
             verticesDoor = new Vector3[4];
 
@@ -38,17 +47,13 @@ public class Wall : MonoBehaviour
             {
                 verticesDoor[i] = transform.TransformPoint(vertexDoor[i]);
             }
-        }
-    }
 
-    private void Update()
-    {
-        plane = new Plane(vertices[vertex[0]], vertices[vertex[1]], vertices[vertex[2]]);
-
-        if(isVisble)
-        {
             doorPlane = new Plane(verticesDoor[0], verticesDoor[1], verticesDoor[2]);
+            quadrilateralDoor = new Quadrilateral(verticesDoor[0], verticesDoor[1], verticesDoor[2], verticesDoor[3]);
         }
+
+        quadrilateral = new Quadrilateral(vertices[vertex[0]], vertices[vertex[1]], vertices[vertex[2]], vertices[vertex[3]]);
+
     }
 
     private void OnDrawGizmos()
@@ -63,7 +68,7 @@ public class Wall : MonoBehaviour
         Gizmos.DrawLine(vertices[vertex[2]], vertices[vertex[3]]);
         Gizmos.DrawLine(vertices[vertex[3]], vertices[vertex[0]]);
 
-        Vector3 center = (vertices[vertex[0]] + vertices[vertex[1]] + vertices[vertex[2]] + vertices[vertex[3]]) / 4.0f;
+        center = (vertices[vertex[0]] + vertices[vertex[1]] + vertices[vertex[2]] + vertices[vertex[3]]) / 4.0f;
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(center, center + plane.normal);
@@ -77,7 +82,7 @@ public class Wall : MonoBehaviour
             Gizmos.DrawLine(verticesDoor[2], verticesDoor[3]);
             Gizmos.DrawLine(verticesDoor[3], verticesDoor[0]);
 
-            Vector3 doorCenter = (verticesDoor[0] + verticesDoor[1] + verticesDoor[2] + verticesDoor[3]) / 4.0f;
+            doorCenter = (verticesDoor[0] + verticesDoor[1] + verticesDoor[2] + verticesDoor[3]) / 4.0f;
 
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(doorCenter, doorCenter + doorPlane.normal);

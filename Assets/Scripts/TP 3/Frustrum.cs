@@ -6,12 +6,12 @@ public class Frustrum : MonoBehaviour
 {
     public Plane[] planes = new Plane[6];
 
-    Quadrilateral nearPlane;
-    Quadrilateral farPlane;
-    Quadrilateral topPlane;
-    Quadrilateral bottonPlane;
-    Quadrilateral leftPlane;
-    Quadrilateral rightPlane;
+    public Quadrilateral nearPlane;
+    public Quadrilateral farPlane;
+    public Quadrilateral topPlane;
+    public Quadrilateral bottonPlane;
+    public Quadrilateral leftPlane;
+    public Quadrilateral rightPlane;
 
     void Start()
     {
