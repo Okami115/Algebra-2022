@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,39 +9,50 @@ public class Ball : MonoBehaviour
     [SerializeField] private Ball[] balls;
     [SerializeField] private float fricction;
 
+    public TypeBall typeBall;
+
     public float radius;
     public float mass;
     public Vector3 velocity;
     public Vector3 position;
 
+    public bool isActive = true;
+
     private void Update()
     {
         position = transform.position;
 
-        for (int i = 0; i < balls.Length; i++)
+        if (isActive)
         {
-            if (IsSphereCollidingWithSphere(position, radius, balls[i].position, balls[i].radius))
+            for (int i = 0; i < balls.Length; i++)
             {
-                CollisionWithSphere(balls[i]);
+                if (balls[i].isActive && IsSphereCollidingWithSphere(position, radius, balls[i].position, balls[i].radius))
+                {
+                    CollisionWithSphere(balls[i]);
+                }
+            }
+
+            if(Vector3.Distance(velocity, Vector3.zero) > Vector3.kEpsilon)
+            {
+                position.x += velocity.x * Time.deltaTime;
+                position.y = 0.75f;
+                position.z += velocity.z * Time.deltaTime;
+
+                transform.position = position;
+
+                Vector3 friction = -velocity.normalized * fricction * mass;
+
+                if (friction.magnitude > velocity.magnitude / Time.deltaTime)
+                {
+                    friction = velocity * -1.0f / Time.deltaTime;
+                }
+
+                ApplyForce(friction);
             }
         }
-
-        if(velocity != Vector3.zero)
+        else
         {
-            position.x += velocity.x * Time.deltaTime;
-            position.y = 0.75f;
-            position.z += velocity.z * Time.deltaTime;
-
-            transform.position = position;
-
-            Vector3 friction = -velocity.normalized * fricction * mass;
-
-            if (friction.magnitude > velocity.magnitude / Time.deltaTime)
-            {
-                friction = velocity * -1.0f / Time.deltaTime;
-            }
-
-            ApplyForce(friction);
+            position = new Vector3(0, -100, 0);
         }
     }
 
@@ -68,22 +80,40 @@ public class Ball : MonoBehaviour
 
     private void CollisionWithSphere(Ball other)
     {
+        // Calcula la normal del punto de colision
         Vector3 collisionNormal = (other.position - position).normalized;
+
+        // Calcula la velocidad resultante de este choque
         Vector3 relativeVelocity = other.velocity - velocity;
 
+        // orienta el vector de la velocidad hacia la normal de choque
         float velocityAlongNormal = Vector3.Dot(relativeVelocity, collisionNormal);
 
         if (velocityAlongNormal > 0)
             return;
 
         // Coeficiente de elasticidad
-        float e = 1.0f;// Es completamente eslastica
+        float e = 1.0f;// Es completamente elastica
 
-        float j = -(1 + e) * velocityAlongNormal;
+        //Impulso escalar que mantiene el momento del choque
+        float j = -(1 + e) * velocityAlongNormal; // calcula la magnitud del impulso
+
+        //Ajusta el impulso en funcion de la masa de cada bola
         j /= 1 / mass + 1 / other.mass;
 
         Vector3 impulse = j * collisionNormal;
+
+        // Se aplica el impuso a cada bola dependiendo del lado del choque en el que esten
         velocity -= impulse / mass;
         other.velocity += impulse / other.mass;
     }
+}
+
+[Serializable]
+public enum TypeBall
+{
+    White,
+    Black,
+    Smooth,
+    Scratched
 }

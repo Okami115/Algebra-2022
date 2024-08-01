@@ -30,7 +30,7 @@ public class BoxColider : MonoBehaviour
     {
         for (int i = 0; i < balls.Length; i++)
         {
-            if (IsSphereCollidingWithCube(balls[i].position, balls[i].radius, aabbMin, aabbMax))
+            if (balls[i].isActive && IsSphereCollidingWithCube(balls[i].position, balls[i].radius, aabbMin, aabbMax))
             {
                 Vector3 closestPoint = new Vector3(
                     Mathf.Max(aabbMin.x, Mathf.Min(balls[i].position.x, aabbMax.x)),
