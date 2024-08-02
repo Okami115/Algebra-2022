@@ -132,6 +132,7 @@ public class RayCrocante : MonoBehaviour
 
                 Debug.Log($"Pos in {room.gameObject.name}: {outVec3}");
                 room.SetActiveRoom(true);
+                roomsChecked.Clear();
                 return outVec3;
             }
         }

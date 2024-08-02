@@ -122,7 +122,7 @@ public class RayForPlayer : MonoBehaviour
     {
         point = (start + end / 2);
 
-        FindRoomNear(point);
+        FindRoomNear(point, currentRoom);
 
         /*
         bool inRoom = false;
@@ -199,49 +199,57 @@ public class RayForPlayer : MonoBehaviour
         }
     }
 
-    private bool FindRoomNear(Vector3 point)
+    private bool FindRoomNear(Vector3 point, Room room)
     {
         bool inRoom = false;
 
-        do
+        for (int i = 0; i < room.roomsAdyasent.Length; i++)
         {
-            for (int i = 0; i < Rooms.Length; i++)
-            {
-                Plane[] walls = new Plane[4];
+            Plane[] walls = new Plane[4];
 
-                for (int k = 0; k < Rooms[i].walls.Length; k++)
-                {
-                    walls[k] = Rooms[i].walls[k].plane;
-                }
+            for (int k = 0; k < room.roomsAdyasent[i].walls.Length; k++)
+            {
+                walls[k] = room.roomsAdyasent[i].walls[k].plane;
+            }
+
+            if (!roomsChecked.Contains(room.roomsAdyasent[i]))
+            {
+                roomsChecked.Add(room.roomsAdyasent[i]);
 
                 if (AABBCalculator.IsInPlanes(point, walls))
                 {
                     corte.transform.position = point;
                     inRoom = true;
+                    // Draw room
                     Debug.Log($"IN ROOM : {i}");
 
-                    if (Rooms[i] != currentRoom)
+                    if(room == currentRoom)
                     {
-                        roomsChecked.Add(currentRoom);
-                        SetRoom(Rooms[i], currentRoom.roomsAdyasent);
+                        // return room
+                        //return true;
                     }
-
-                    break;
                 }
-            }
+                else
+                {
+                    inRoom = FindRoomNear(point, room.roomsAdyasent[i]);
+                }
 
-            if (!inRoom)
-                point = (start + point / 2);
-
-            if (roomsChecked.Count == Rooms.Length)
-                inRoom = true;
-
-            if (point == (start + point / 2))
-                inRoom = true;
-
-
+                if(inRoom)
+                    break;
+            }           
         }
-        while (!inRoom);
+
+        if (!inRoom)
+        {
+            point = (start + point / 2);
+            FindRoomNear(point, room);
+        }
+
+        if (roomsChecked.Count == Rooms.Length)
+            inRoom = true;
+
+        if (point == (start + point / 2))
+            inRoom = true;
 
         return inRoom;
     }
