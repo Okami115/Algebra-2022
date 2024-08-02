@@ -235,10 +235,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -449,6 +449,8 @@ MonoBehaviour:
   player2: {fileID: 1513217257}
   player1win: {fileID: 1841010497}
   player2win: {fileID: 57525690}
+  smoothMatchPoint: 0
+  scratchedMatchPoint: 0
   playerTurn: 1
   wait: 0
 --- !u!1 &133999002
@@ -657,10 +659,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -1133,10 +1135,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -1504,10 +1506,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
+  fricction: 0.26
   typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 0
@@ -1524,7 +1526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 652140142}
-  forceMultiplier: 200
+  forceMultiplier: 10
   gameManager: {fileID: 113485889}
   menu: {fileID: 1781958503}
   whiteSpawn: {fileID: 282265342}
@@ -1754,10 +1756,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -2257,10 +2259,10 @@ MonoBehaviour:
   - {fileID: 1435379110}
   - {fileID: 1904282226}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -2790,10 +2792,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -3185,10 +3187,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -3304,10 +3306,10 @@ MonoBehaviour:
   - {fileID: 1435379110}
   - {fileID: 1904282226}
   - {fileID: 1127146549}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -3898,10 +3900,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -4465,10 +4467,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -4710,10 +4712,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -5129,10 +5131,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 1
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -5248,10 +5250,10 @@ MonoBehaviour:
   - {fileID: 1435379110}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 3
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -5367,10 +5369,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1
@@ -5600,10 +5602,10 @@ MonoBehaviour:
   - {fileID: 1904282226}
   - {fileID: 1127146549}
   - {fileID: 1436366065}
-  fricction: 0.52
-  typeBall: 2
+  fricction: 0.26
+  typeBall: 0
   radius: 0.285
-  mass: 1
+  mass: 0.17
   velocity: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   isActive: 1

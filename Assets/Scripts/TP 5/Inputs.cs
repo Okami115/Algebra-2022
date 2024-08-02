@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class Inputs : MonoBehaviour
 {
@@ -31,7 +28,7 @@ public class Inputs : MonoBehaviour
 
     void Update()
     {
-        if(!inMenu)
+        if(!inMenu && ball.isActive)
         {
             if (Input.GetMouseButtonDown(0) && !gameManager.wait)
             {

@@ -56,8 +56,6 @@ public class RayForPlayer : MonoBehaviour
 
         dir = start - end;
 
-        point = (start + end / 2);
-
         CheckRooms();
 
         for (int i = 0; i < currentRoom.walls.Length; i++)
@@ -122,45 +120,11 @@ public class RayForPlayer : MonoBehaviour
 
     private void CheckRooms()
     {
+        point = (start + end / 2);
+
+        FindRoomNear(point);
+
         bool inRoom = false;
-
-        do
-        {
-            for (int i = 0; i < Rooms.Length; i++)
-            {
-                Plane[] walls = new Plane[4];
-
-                for (int k = 0; k < Rooms[i].walls.Length; k++)
-                {
-                    walls[k] = Rooms[i].walls[k].plane;
-                }
-
-                if (AABBCalculator.IsInPlanes(point, walls))
-                {
-                    corte.transform.position = point;
-                    inRoom = true;
-                    Debug.Log($"IN ROOM : {i}");
-
-                    if (Rooms[i] != currentRoom)
-                    {
-                        roomsChecked.Add(currentRoom);
-                        SetRoom(Rooms[i], currentRoom.roomsAdyasent);
-                    }
-
-                    break;
-                }
-            }
-
-            if (point == (start + point / 2))
-                inRoom = true;
-
-            if (!inRoom)
-                point = (start + point / 2);
-
-        }
-        while (!inRoom);
-
-        inRoom = false;
         point = (start + end / 2);
 
         do
@@ -190,11 +154,11 @@ public class RayForPlayer : MonoBehaviour
                 }
             }
 
-            if (point == (point + end / 2))
-                inRoom = true;
-
             if (!inRoom)
+            {
                 point = (point + end / 2);
+                inRoom = FindRoomNear(point);
+            }
 
         }
         while (!inRoom);
@@ -231,5 +195,51 @@ public class RayForPlayer : MonoBehaviour
             }
 
         }
+    }
+
+    private bool FindRoomNear(Vector3 point)
+    {
+        bool inRoom = false;
+
+        do
+        {
+            for (int i = 0; i < Rooms.Length; i++)
+            {
+                Plane[] walls = new Plane[4];
+
+                for (int k = 0; k < Rooms[i].walls.Length; k++)
+                {
+                    walls[k] = Rooms[i].walls[k].plane;
+                }
+
+                if (AABBCalculator.IsInPlanes(point, walls))
+                {
+                    corte.transform.position = point;
+                    inRoom = true;
+                    Debug.Log($"IN ROOM : {i}");
+
+                    if (Rooms[i] != currentRoom)
+                    {
+                        roomsChecked.Add(currentRoom);
+                        SetRoom(Rooms[i], currentRoom.roomsAdyasent);
+                    }
+
+                    break;
+                }
+            }
+
+            if (roomsChecked.Count == Rooms.Length)
+                inRoom = true;
+
+            if (point == (start + point / 2))
+                inRoom = true;
+
+            if (!inRoom)
+                point = (start + point / 2);
+
+        }
+        while (!inRoom);
+
+        return inRoom;
     }
 }

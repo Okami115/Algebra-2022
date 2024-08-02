@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,10 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player1win;
     [SerializeField] private GameObject player2win;
 
-    
-
-    bool smoothMatchPoint = false;
-    bool scratchedMatchPoint = false;
+    public bool smoothMatchPoint = false;
+    public bool scratchedMatchPoint = false;
 
     public Action endTurn;
 
@@ -59,7 +55,6 @@ public class GameManager : MonoBehaviour
             if (!smooth[i].isActive)
             {
                 iterado++;
-                break;
             }
         }
 
@@ -73,7 +68,6 @@ public class GameManager : MonoBehaviour
             if (!scratched[i].isActive)
             {
                 iterado++;
-                break;
             }
         }
 
@@ -132,11 +126,13 @@ public class GameManager : MonoBehaviour
             if(smoothMatchPoint)
             {
                 Debug.Log("Player 1 win");
+                DisableTablet();
                 player1win.SetActive(true);
             }
             else
             {
                 Debug.Log("Player 2 win");
+                DisableTablet();
                 player2win.SetActive(true);
             }
         }
@@ -145,14 +141,32 @@ public class GameManager : MonoBehaviour
             if (scratchedMatchPoint)
             {
                 Debug.Log("Player 2 win");
+                DisableTablet();
                 player2win.SetActive(true);
             }
             else
             {
                 Debug.Log("Player 1 win");
+                DisableTablet();
                 player1win.SetActive(true);
             }
         }
+    }
+
+    private void DisableTablet()
+    {
+        for (int i = 0; i < smooth.Length; i++)
+        {
+            smooth[i].isActive = false;
+        }
+
+        for (int i = 0; i < scratched.Length; i++)
+        {
+            scratched[i].isActive = false;
+        }
+
+        white.isActive = false;
+        black.isActive = false;
     }
 
 }

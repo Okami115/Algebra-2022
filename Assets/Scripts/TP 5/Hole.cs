@@ -11,33 +11,18 @@ public class Hole : MonoBehaviour
 
     public Action blackInHole;
 
-    private bool waitEndTurn;
-
     private void OnEnable()
     {
-        gameManager.endTurn += SetEndTurn;
+        gameManager.endTurn += SpawnWhite;
     }
 
     private void OnDestroy()
     {
-        gameManager.endTurn -= SetEndTurn;
+        gameManager.endTurn -= SpawnWhite;
     }
 
     void Update()
     {
-        if (waitEndTurn)
-        {
-            if(!white.isActive)
-            {
-                white.isActive = true;
-                white.gameObject.transform.position = spawnBall.position;
-                Debug.Log($"Return : {white.gameObject.name}");
-                white.velocity = Vector3.zero;
-                waitEndTurn = false;
-            }
-        }
-
-
         for (int i = 0; i < balls.Length; i++)
         {
             if (balls[i].isActive && Vector3.Distance(transform.position, balls[i].position) < actionRadius)
@@ -45,6 +30,7 @@ public class Hole : MonoBehaviour
                 if (balls[i].typeBall == TypeBall.White)
                 {
                     balls[i].gameObject.transform.position = new Vector3(0, 100, 0);
+                    balls[i].velocity = Vector3.zero;
                     balls[i].isActive = false;
                 }
                 else if (balls[i].typeBall == TypeBall.Black)
@@ -67,8 +53,14 @@ public class Hole : MonoBehaviour
         }
     }
 
-    private void SetEndTurn()
+    void SpawnWhite()
     {
-        waitEndTurn = true;
+        if(!white.isActive)
+        {
+            white.isActive = true;
+            white.gameObject.transform.position = spawnBall.position;
+            Debug.Log($"Return : {white.gameObject.name}");
+            white.velocity = Vector3.zero;
+        }
     }
 }
