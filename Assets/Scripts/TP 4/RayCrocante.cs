@@ -103,19 +103,21 @@ public class RayCrocante : MonoBehaviour
         {
             if (LineIntersectsPlane(end, dir.normalized, room.walls[i].center, room.walls[i].quadrilateral, room.walls[i].plane, out outVec3))
             {
+                roomsChecked.Add(room);
+
                 if (Quadrilateral.IsPointInQuadrilateral(outVec3, room.walls[i].quadrilateralDoor))
                 {
-                    for (int j = 0; j < Rooms.Length; j++)
+                    room.SetActiveRoom(true);
+
+                    for (int j = 0; j < room.roomsAdyasent.Length; j++)
                     {
-                        if (!roomsChecked.Contains(Rooms[j]))
+                        if (!roomsChecked.Contains(room.roomsAdyasent[j]))
                         {
-                            roomsChecked.Add(Rooms[j]);
-                            Vector3 aux = CheckRay(Rooms[j]);
+                            Vector3 aux = CheckRay(room.roomsAdyasent[j]);
 
                             if (aux != Vector3.zero)
                             {
                                 Debug.Log($"Pos in door in {room.gameObject.name} : {outVec3}");
-                                room.SetActiveRoom(true);
                                 roomsChecked.Clear();
                                 return aux;
                             }
@@ -129,15 +131,18 @@ public class RayCrocante : MonoBehaviour
                         return end;
                     }
                 }
+                else
+                {
+                    Debug.Log($"Pos in {room.gameObject.name}: {outVec3}");
+                    room.SetActiveRoom(true);
+                    roomsChecked.Clear();
+                    return outVec3;
+                }
 
-                Debug.Log($"Pos in {room.gameObject.name}: {outVec3}");
-                room.SetActiveRoom(true);
-                roomsChecked.Clear();
-                return outVec3;
             }
         }
 
-        return Vector3.zero;
+        return outVec3;
     }
 
     private void OnDrawGizmos()
