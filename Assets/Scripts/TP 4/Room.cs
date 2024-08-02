@@ -13,7 +13,7 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        SetActiveRoom(false);
+        //SetActiveRoom(false);
     }
 
     public void SetActiveRoom(bool isActive)

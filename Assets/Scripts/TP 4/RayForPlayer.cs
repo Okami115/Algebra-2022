@@ -42,8 +42,6 @@ public class RayForPlayer : MonoBehaviour
         punto = Instantiate(prefab);
         corte = Instantiate(prefab);
         corte2 = Instantiate(prefab);
-
-        currentRoom.SetActiveRoom(true);
     }
 
     private void Update()
@@ -55,8 +53,6 @@ public class RayForPlayer : MonoBehaviour
         end = centerFar;
 
         dir = start - end;
-
-        CheckRooms();
 
         for (int i = 0; i < currentRoom.walls.Length; i++)
         {
@@ -73,6 +69,10 @@ public class RayForPlayer : MonoBehaviour
                 break;
             }
         }
+
+        CheckCurrentRoom();
+
+        CheckRooms();
     }
 
     private void OnDrawGizmos()
@@ -124,6 +124,7 @@ public class RayForPlayer : MonoBehaviour
 
         FindRoomNear(point);
 
+        /*
         bool inRoom = false;
         point = (start + end / 2);
 
@@ -162,6 +163,7 @@ public class RayForPlayer : MonoBehaviour
 
         }
         while (!inRoom);
+        */
     }
 
     private void SetRoom(Room room, Room[] adyasents)
@@ -228,18 +230,42 @@ public class RayForPlayer : MonoBehaviour
                 }
             }
 
+            if (!inRoom)
+                point = (start + point / 2);
+
             if (roomsChecked.Count == Rooms.Length)
                 inRoom = true;
 
             if (point == (start + point / 2))
                 inRoom = true;
 
-            if (!inRoom)
-                point = (start + point / 2);
 
         }
         while (!inRoom);
 
         return inRoom;
+    }
+
+    private void CheckCurrentRoom()
+    {
+        for (int i = 0; i < Rooms.Length; i++)
+        {
+            Plane[] walls = new Plane[4];
+
+            for (int k = 0; k < Rooms[i].walls.Length; k++)
+            {
+                walls[k] = Rooms[i].walls[k].plane;
+            }
+
+            if (AABBCalculator.IsInPlanes(transform.position, walls))
+            {
+                Rooms[i].SetActiveRoom(true);
+                currentRoom = Rooms[i];
+            }
+            else
+            {
+                Rooms[i].SetActiveRoom(false);
+            }
+        }
     }
 }
